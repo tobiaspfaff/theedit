@@ -66,7 +66,11 @@ list(APPEND CORE_INCPATHS
 ##################################
 
 set(CORE_SOURCES
+    src/gravity.cpp
+    src/particle.cpp
     src/test.cpp
+    src/util.cpp
+    src/vectors.cpp
 )
 
 # Build flags
