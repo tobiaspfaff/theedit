@@ -13,6 +13,7 @@ std::string replace(std::string text, const std::string& from, const std::string
 // Math utilities
 extern const double infinity;
 template<typename T> inline T square(T v) { return v*v; }
+template<typename T> inline T cubed(T v) { return v*v*v; }
 inline bool is_finite(double v) { return v < infinity && v > -infinity; }
 inline bool is_nan(double v) { return v != v; }
 inline bool is_nan(const Vec2& v) { return is_nan(v[0]) || is_nan(v[1]); }

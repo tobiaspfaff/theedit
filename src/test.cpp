@@ -6,13 +6,14 @@
 using namespace std;
 
 void gravity_test() {
-    SingleGravityPotential g0(Vec3(0,0,0), 1e0);
-    CrossGravityPotential g1;
-    const double dt = 1e-2;
-    const double out_dt = 1e1;
-    const double max_t = 10000;
+    const double dt = 1e-3;
+    const double out_dt = 1e-2;
+    const double max_t = 10;
 
-    ParticleSet pset(100);
+    RepulsionPotential rp;
+    BoxPotential bp(Vec3(-1,-1,-1),Vec3(1,1,1),Vec3(0,-9.81,0));
+
+    ParticleSet pset(200);
     pset.seed_random();
 
     int frame = 0;
@@ -20,17 +21,22 @@ void gravity_test() {
         vector<Vec3> f0(pset.size());
         vector<Vec3> f1(pset.size());
 
-        // velocity verlet
-        g1.get_force(pset, f0);
+        // velocity verlet integration
+        bp.get_force(pset, f0);
+        rp.get_force(pset, f0);
 
         for (int i=0; i<f0.size(); i++) {
             pset[i].pos += dt * pset[i].vel + 0.5 * f0[i] * dt * dt; 
         }
 
-        g1.get_force(pset, f1);
+        bp.get_force(pset, f1);
+        rp.get_force(pset, f1);
 
         for (int i=0; i<f0.size(); i++) {
             pset[i].vel += 0.5 * dt * (f0[i] + f1[i]);
+
+            // damping
+            pset[i].vel *= 0.999;
         }
 
         // save

@@ -17,7 +17,7 @@ void ParticleSet::seed_random() {
     for (auto& p: data) {
         p.mass = def_mass;
         p.pos = Vec3(rand_uni(rand_eng),rand_uni(rand_eng),0);
-        p.vel = Vec3(0.01*rand_uni(rand_eng),0.01*rand_uni(rand_eng),0);
+        p.vel = 0.0*Vec3(0.01*rand_uni(rand_eng),0.01*rand_uni(rand_eng),0);
     }
 }
 

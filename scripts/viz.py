@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 import numpy as np
 import matplotlib.pyplot as plt
+import matplotlib.patches as patches
 import matplotlib.animation as animation
 import sys, os, time
 
@@ -35,8 +36,9 @@ print 'Load complete'
 
 # display
 fig = plt.figure()
-ax = plt.axes(xlim=(-10,10), ylim=(-10,10))
+ax = plt.axes(xlim=(-3,3), ylim=(-3,3))
 particles, = ax.plot([],[],'bo',ms=6)
+ax.add_patch(patches.Rectangle((-1,-1),2,2,fill=False))
 
 def init_plot():
     particles.set_data([],[])
