@@ -36,17 +36,18 @@ print 'Load complete'
 
 # display
 fig = plt.figure()
-ax = plt.axes(xlim=(-3,3), ylim=(-3,3))
-particles, = ax.plot([],[],'bo',ms=6)
+ax = plt.axes(xlim=(-1.2,1.2), ylim=(-1.2,1.2))
+particles = ax.scatter([],[],edgecolors=None,s=100)
 ax.add_patch(patches.Rectangle((-1,-1),2,2,fill=False))
 
 def init_plot():
-    particles.set_data([],[])
+    #particles.set_data([],[])
     return particles,
 
 def le_plot(idx):    
     print 'Frame %d' % idx
-    particles.set_data(data[idx][:,0],data[idx][:,1])
+    particles.set_offsets(data[idx])
+    particles.set_array(np.linspace(0,0.1,len(data[idx])))
     return particles,
 
 

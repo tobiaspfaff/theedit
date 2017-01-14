@@ -13,8 +13,9 @@ void gravity_test() {
     RepulsionPotential rp;
     BoxPotential bp(Vec3(-1,-1,-1),Vec3(1,1,1),Vec3(0,-9.81,0));
 
-    ParticleSet pset(200);
+    ParticleSet pset(100);
     pset.seed_random();
+    pset.seed_unicorn();
 
     int frame = 0;
     for (double t=0, lt=0; t < max_t; t += dt, lt += dt) {
@@ -26,17 +27,17 @@ void gravity_test() {
         rp.get_force(pset, f0);
 
         for (int i=0; i<f0.size(); i++) {
-            pset[i].pos += dt * pset[i].vel + 0.5 * f0[i] * dt * dt; 
+            pset[i].pos += dt * pset[i].vel + 0.5 * f0[i] / pset[i].mass * dt * dt; 
         }
 
         bp.get_force(pset, f1);
         rp.get_force(pset, f1);
 
         for (int i=0; i<f0.size(); i++) {
-            pset[i].vel += 0.5 * dt * (f0[i] + f1[i]);
+            pset[i].vel += 0.5 * dt * (f0[i] + f1[i]) / pset[i].mass;
 
             // damping
-            pset[i].vel *= 0.999;
+            pset[i].vel *= 0.998;
         }
 
         // save

@@ -21,6 +21,7 @@ public:
     inline std::vector<ParticleData>& ptr() { return data; }
 
     void seed_random();
+    void seed_unicorn();
     void save(const std::string& filename);
 
 private:
