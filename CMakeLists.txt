@@ -27,12 +27,17 @@ endif()
 # External libraries
 ##################################
 
-set(LIBS)
+set(LIBS "glog")
 set(LIBPATHS)
 
 find_package(TBB REQUIRED)
 list(APPEND LIBS ${TBB_LIBRARIES})
 list(APPEND LIBPATHS ${TBB_LIBRARY_DIRS})
+
+find_package(Ceres REQUIRED)
+list(APPEND LIBS ${CERES_LIBRARIES})
+
+find_package(Eigen REQUIRED)
 
 set(Boost_USE_STATIC_LIBS ON)
 set(Boost_USE_STATIC_RUNTIME ON)
@@ -56,7 +61,9 @@ add_subdirectory("dependencies")
 set(CORE_INCPATHS "src")
 list(APPEND CORE_INCPATHS 
     ${TBB_INCLUDE_DIR} 
+    ${EIGEN_INCLUDE_DIR}
     ${Boost_INCLUDE_DIRS} 
+    ${CERES_INCLUDE_DIRS}
     ${SuiteSparse_INCLUDE_DIRS}
 )
 
