@@ -31,7 +31,7 @@ for i in range(100000):
 
     pos = load(filename)
     data.append(pos)
-
++
 print 'Load complete'
 
 # display
